@@ -45,6 +45,8 @@ public class ShiroConfig {
         //配置退出，过滤器，其中的具体的退出代码Shiro已经以我们实现了
         filterChainDefinitionMap.put("/logout","logout");
 
+
+
         //特别注意，过滤链定义，从上向下顺序执行，一般讲/**放在最边，这是一个坑呢，一不小心代码就不好使了
         //所有的url都必须认证通过后才可以访问，anon所有url都可以匿名访问
 //        filterChainDefinitionMap.put("/**","annon")
@@ -66,9 +68,9 @@ public class ShiroConfig {
         //设置realm
         defaultWebSecurityManager.setRealm(myShiroRealm());
         //设置rememberMe
-        defaultWebSecurityManager.setRememberMeManager(rememberMeManager());
+//        defaultWebSecurityManager.setRememberMeManager(rememberMeManager());
         //设置缓存
-        defaultWebSecurityManager.setCacheManager(ehCacheManager());
+//        defaultWebSecurityManager.setCacheManager(ehCacheManager());
         return defaultWebSecurityManager;
     }
 
@@ -80,107 +82,107 @@ public class ShiroConfig {
     public UserRealm myShiroRealm(){
         UserRealm myShiroRealm = new UserRealm();
         //使用的hash密码比较器，，也可以使用自己的密码比较器
-        myShiroRealm.setCredentialsMatcher(hashedCredentialsMatcher());
+//        myShiroRealm.setCredentialsMatcher(hashedCredentialsMatcher());
 
         return myShiroRealm;
     }
 
-    /**
-     * 配置自定义的密码比较器
-     * @return
-     */
-    @Bean
-    public CredentialsMatcher credentialsMatcher(){
-        return new CredentialsMatcher();
-    }
-
-    /**
-     * 哈希密码比较器。在myShiroReal,中作为参数使用
-     * 登录时会比较用户输入的密码，跟数据库密码结合盐值salt解密后时候一致
-     * @return
-     */
-    @Bean
-    public HashedCredentialsMatcher hashedCredentialsMatcher(){
-        HashedCredentialsMatcher hashedCredentialsMatcher = new HashedCredentialsMatcher();
-        hashedCredentialsMatcher.setHashAlgorithmName("md5");//散列散发：这里使用MD5算法
-        hashedCredentialsMatcher.setHashIterations(2);//散列的次数，比如散列两次，相当于md5（md5（""））
-        return hashedCredentialsMatcher;
-    }
-
-    /**
-     * shiro缓存管理器
-     * 需要注入对应的其它实体类中：安全管理器securityManager
-     * 可见securiityManager是整个shiro的核心
-     * @return
-     */
-    @Bean
-    public EhCacheManager ehCacheManager(){
-        EhCacheManager ehCacheManager = new EhCacheManager();
-        //需要配置配置文件才可以
-        ehCacheManager.setCacheManagerConfigFile("");
-        return ehCacheManager;
-    }
-
-    /**
-     * 记住我管理器
-     * @return
-     */
-    @Bean
-    public CookieRememberMeManager rememberMeManager(){
-        CookieRememberMeManager cookieRememberMeManager = new CookieRememberMeManager();
-        cookieRememberMeManager.setCookie(rememberMeCookie());
-
-        return cookieRememberMeManager;
-    }
-
-
-    /**
-     * Cookie对象
-     * @return
-     */
-    @Bean
-    public Cookie rememberMeCookie(){
-        SimpleCookie simpleCookie = new SimpleCookie("rememberMe");
-        //技术我cookie生效时间，单位秒
-        simpleCookie.setMaxAge(3600);
-        return simpleCookie;
-    }
-
-
-    /**
-     * 开启shiro aop注解支持
-     * 使用代理方式：所以需要开启代码支持：否则@RequiresRoles等注解无法生效
-     * @param securityManager
-     * @return
-     */
-    @Bean
-    public AuthorizationAttributeSourceAdvisor authorizationAttributeSourceAdvisor(SecurityManager securityManager){
-        AuthorizationAttributeSourceAdvisor authorizationAttributeSourceAdvisor = new AuthorizationAttributeSourceAdvisor();
-        authorizationAttributeSourceAdvisor.setSecurityManager(securityManager);
-        return authorizationAttributeSourceAdvisor;
-    }
-
-    /**
-     * Shiro 声明周期处理器
-     * @return
-     */
-    @Bean
-    public LifecycleBeanPostProcessor lifecycleBeanPostProcessor(){
-        return new LifecycleBeanPostProcessor();
-    }
-
-
-    /**
-     * 自动创建代理
-     * @return
-     */
-    @Bean
-    @DependsOn({"lifecycleBeanPostProcessor"})
-    public DefaultAdvisorAutoProxyCreator defaultAdvisorAutoProxyCreator(){
-        DefaultAdvisorAutoProxyCreator defaultAdvisorAutoProxyCreator = new DefaultAdvisorAutoProxyCreator();
-        defaultAdvisorAutoProxyCreator.setProxyTargetClass(true);
-        return defaultAdvisorAutoProxyCreator;
-    }
+//    /**
+//     * 配置自定义的密码比较器
+//     * @return
+//     */
+//    @Bean
+//    public CredentialsMatcher credentialsMatcher(){
+//        return new CredentialsMatcher();
+//    }
+//
+//    /**
+//     * 哈希密码比较器。在myShiroReal,中作为参数使用
+//     * 登录时会比较用户输入的密码，跟数据库密码结合盐值salt解密后时候一致
+//     * @return
+//     */
+//    @Bean
+//    public HashedCredentialsMatcher hashedCredentialsMatcher(){
+//        HashedCredentialsMatcher hashedCredentialsMatcher = new HashedCredentialsMatcher();
+//        hashedCredentialsMatcher.setHashAlgorithmName("md5");//散列散发：这里使用MD5算法
+//        hashedCredentialsMatcher.setHashIterations(2);//散列的次数，比如散列两次，相当于md5（md5（""））
+//        return hashedCredentialsMatcher;
+//    }
+//
+//    /**
+//     * shiro缓存管理器
+//     * 需要注入对应的其它实体类中：安全管理器securityManager
+//     * 可见securiityManager是整个shiro的核心
+//     * @return
+//     */
+//    @Bean
+//    public EhCacheManager ehCacheManager(){
+//        EhCacheManager ehCacheManager = new EhCacheManager();
+//        //需要配置配置文件才可以
+//        ehCacheManager.setCacheManagerConfigFile("");
+//        return ehCacheManager;
+//    }
+//
+//    /**
+//     * 记住我管理器
+//     * @return
+//     */
+//    @Bean
+//    public CookieRememberMeManager rememberMeManager(){
+//        CookieRememberMeManager cookieRememberMeManager = new CookieRememberMeManager();
+//        cookieRememberMeManager.setCookie(rememberMeCookie());
+//
+//        return cookieRememberMeManager;
+//    }
+//
+//
+//    /**
+//     * Cookie对象
+//     * @return
+//     */
+//    @Bean
+//    public Cookie rememberMeCookie(){
+//        SimpleCookie simpleCookie = new SimpleCookie("rememberMe");
+//        //技术我cookie生效时间，单位秒
+//        simpleCookie.setMaxAge(3600);
+//        return simpleCookie;
+//    }
+//
+//
+//    /**
+//     * 开启shiro aop注解支持
+//     * 使用代理方式：所以需要开启代码支持：否则@RequiresRoles等注解无法生效
+//     * @param securityManager
+//     * @return
+//     */
+//    @Bean
+//    public AuthorizationAttributeSourceAdvisor authorizationAttributeSourceAdvisor(SecurityManager securityManager){
+//        AuthorizationAttributeSourceAdvisor authorizationAttributeSourceAdvisor = new AuthorizationAttributeSourceAdvisor();
+//        authorizationAttributeSourceAdvisor.setSecurityManager(securityManager);
+//        return authorizationAttributeSourceAdvisor;
+//    }
+//
+//    /**
+//     * Shiro 声明周期处理器
+//     * @return
+//     */
+//    @Bean
+//    public LifecycleBeanPostProcessor lifecycleBeanPostProcessor(){
+//        return new LifecycleBeanPostProcessor();
+//    }
+//
+//
+//    /**
+//     * 自动创建代理
+//     * @return
+//     */
+//    @Bean
+//    @DependsOn({"lifecycleBeanPostProcessor"})
+//    public DefaultAdvisorAutoProxyCreator defaultAdvisorAutoProxyCreator(){
+//        DefaultAdvisorAutoProxyCreator defaultAdvisorAutoProxyCreator = new DefaultAdvisorAutoProxyCreator();
+//        defaultAdvisorAutoProxyCreator.setProxyTargetClass(true);
+//        return defaultAdvisorAutoProxyCreator;
+//    }
 
 
 }

@@ -1,8 +1,8 @@
 package com.jakcray.springbootshiro.controller;
 
-import org.apache.shiro.SecurityUtils;
-import org.apache.shiro.authc.UsernamePasswordToken;
-import org.apache.shiro.subject.Subject;
+//import org.apache.shiro.SecurityUtils;
+//import org.apache.shiro.authc.UsernamePasswordToken;
+//import org.apache.shiro.subject.Subject;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -22,11 +22,11 @@ public class LoginController {
     @RequestMapping(value = "/login",method = RequestMethod.POST)
     public String login(String username, String password, Model model){
 
-        UsernamePasswordToken upt = new UsernamePasswordToken();
-
-        Subject subject = SecurityUtils.getSubject();
-
-        subject.login(upt);
+//        UsernamePasswordToken upt = new UsernamePasswordToken();
+//
+//        Subject subject = SecurityUtils.getSubject();
+//
+//        subject.login(upt);
 
 
 

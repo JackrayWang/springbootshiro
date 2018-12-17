@@ -32,18 +32,18 @@ public class UserRealm extends AuthorizingRealm {
         logger.info("-------------------------授权----------------");
 
         SimpleAuthorizationInfo simpleAuthorizationInfo = new SimpleAuthorizationInfo();
-        //获取用户名
-        String username = (String)principalCollection.getPrimaryPrincipal();
-
-        Set<String>  roleSet = new HashSet<>();
-        Set<String> permissionSet = new HashSet<>();
-
-
-
-        //将角色名称提供给授权
-        simpleAuthorizationInfo.setRoles(roleSet);
-        //将权限名称提供给授权
-        simpleAuthorizationInfo.setStringPermissions(permissionSet);
+//        //获取用户名
+//        String username = (String)principalCollection.getPrimaryPrincipal();
+//
+//        Set<String>  roleSet = new HashSet<>();
+//        Set<String> permissionSet = new HashSet<>();
+//
+//
+//
+//        //将角色名称提供给授权
+//        simpleAuthorizationInfo.setRoles(roleSet);
+//        //将权限名称提供给授权
+//        simpleAuthorizationInfo.setStringPermissions(permissionSet);
         return simpleAuthorizationInfo;
     }
 
@@ -59,26 +59,26 @@ public class UserRealm extends AuthorizingRealm {
     @Override
     protected AuthenticationInfo doGetAuthenticationInfo(AuthenticationToken authenticationToken) throws AuthenticationException {
         logger.info("-------------------------认证----------------");
-        String username=(String)authenticationToken.getPrincipal();
-
-        UserDAO user = new UserDAO();
-        if(user== null){
-            throw new UnknownAccountException();
-        }
-        if(UtilsStatus.LOCKED.equals(user.getStatus())){
-            throw new LockedAccountException("账户永久锁定，请联系管理人员！");
-        }
-        if(UtilsStatus.TEMP_LOCKED.equals(user.getStatus())){
-            throw new LockedAccountException("账户临时锁定，24小时候自动解锁！");
-        }
-        //密码可以通过SimpleHash加密，然后保存到数据库
-        //此处是获取数据库内的账号、密码、盐值，保存到登录信息info中
-        SimpleAuthenticationInfo simpleAuthenticationInfo = new SimpleAuthenticationInfo(
-                user.getUsername(),
-                user.getPassword(),
-                ByteSource.Util.bytes(user.getEmail()),
-                getName());
-
+//        String username=(String)authenticationToken.getPrincipal();
+//
+//        UserDAO user = new UserDAO();
+//        if(user== null){
+//            throw new UnknownAccountException();
+//        }
+//        if(UtilsStatus.LOCKED.equals(user.getStatus())){
+//            throw new LockedAccountException("账户永久锁定，请联系管理人员！");
+//        }
+//        if(UtilsStatus.TEMP_LOCKED.equals(user.getStatus())){
+//            throw new LockedAccountException("账户临时锁定，24小时候自动解锁！");
+//        }
+//        //密码可以通过SimpleHash加密，然后保存到数据库
+//        //此处是获取数据库内的账号、密码、盐值，保存到登录信息info中
+//        SimpleAuthenticationInfo simpleAuthenticationInfo = new SimpleAuthenticationInfo(
+//                user.getUsername(),
+//                user.getPassword(),
+//                ByteSource.Util.bytes(user.getEmail()),
+//                getName());
+        SimpleAuthenticationInfo simpleAuthenticationInfo = new SimpleAuthenticationInfo();
         return simpleAuthenticationInfo;
     }
 }

@@ -113,14 +113,14 @@
             <artifactId>spring-boot-starter-log4j2</artifactId>
         </dependency>
 
-        <!-- https://mvnrepository.com/artifact/org.apache.shiro/shiro-core -->
+        <!-- https://mvnrepository.com/artifact/org.apache.shiro/shiro-core-->
         <dependency>
             <groupId>org.apache.shiro</groupId>
             <artifactId>shiro-core</artifactId>
             <version>1.4.0</version>
         </dependency>
 
-        <!-- https://mvnrepository.com/artifact/org.apache.shiro/shiro-ehcache -->
+        <!-- https://mvnrepository.com/artifact/org.apache.shiro/shiro-ehcache-->
         <dependency>
             <groupId>org.apache.shiro</groupId>
             <artifactId>shiro-ehcache</artifactId>
@@ -128,7 +128,7 @@
         </dependency>
 
 
-        <!-- https://mvnrepository.com/artifact/org.apache.shiro/shiro-spring -->
+        <!-- https://mvnrepository.com/artifact/org.apache.shiro/shiro-spring-->
         <dependency>
             <groupId>org.apache.shiro</groupId>
             <artifactId>shiro-spring</artifactId>
@@ -140,6 +140,7 @@
                 </exclusion>
             </exclusions>
         </dependency>
+
         <!-- https://mvnrepository.com/artifact/mysql/mysql-connector-java -->
         <dependency>
             <groupId>mysql</groupId>
