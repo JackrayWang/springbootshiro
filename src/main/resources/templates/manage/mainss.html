@@ -2,6 +2,9 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
+    <meta name="renderer" content="webkit">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
     <title>Title</title>
 
     <link rel="stylesheet" type="text/css" href="/layui/css/layui.css"/>
@@ -10,23 +13,26 @@
 
 <div class="layui-tab layui-tab-card site-demo-button" style="position: relative;">
     <ul class="layui-nav layui-nav-tree layui-nav-side">
+
         <li class="layui-nav-item layui-nav-itemed">
             <a href="javascript:;">默认展开</a>
             <dl class="layui-nav-child">
 
                 <dd>
-                    <a  data-id="11" data-title="选项a" href="/welcome" class="site-demo-active" data-type="tabAdd">选项a</a>
+                    <a href="#" data-url="/menu1" data-title="选项b"  data-id="1" class="site-demo-active" data-type="tabAdd">选项b</a>
                 </dd>
 
                 <dd>
-                    <a href="#" data-url="b" data-title="选项b"  data-id="22" class="site-demo-active" data-type="tabAdd">选项b</a>
+                    <a href="#" data-url="/welcome" data-title="选项b"  data-id="2" class="site-demo-active" data-type="tabAdd">选项b</a>
                 </dd>
 
                 <dd>
-                    <a href="">跳转</a>
+                    <a href="#" data-url="b" data-title="选项b"  data-id="3" class="site-demo-active" data-type="tabAdd">选项b</a>
                 </dd>
+
             </dl>
         </li>
+
         <li class="layui-nav-item">
             <a href="javascript:;">解决方案</a>
             <dl class="layui-nav-child">
@@ -41,14 +47,17 @@
                 </dd>
             </dl>
         </li>
+
         <li class="layui-nav-item">
             <a href="#" data-url="c" data-title="选项c"  data-id="33" class="site-demo-active" data-type="tabAdd">产品c</a>
         </li>
+
         <li class="layui-nav-item">
             <a href="">大数据</a>
         </li>
-    </ul>
 
+    </ul>
+    <!-- 展示的区域-->
     <div class="layui-tab" lay-filter="demo" lay-allowclose="true" style="margin-left: 200px;">
         <ul class="layui-tab-title">
         </ul>
@@ -59,11 +68,13 @@
         <div class="layui-tab-content">
         </div>
     </div>
+
 </div>
 
 <script src="/layui/layui.js" type="text/javascript" charset="utf-8"></script>
 
 <script>
+    //
     layui.use('element', function() {
         var $ = layui.jquery;
         var element = layui.element; //Tab的切换功能，切换事件监听等，需要依赖element模块
@@ -76,7 +87,7 @@
                 //关于tabAdd的方法所传入的参数可看layui的开发文档中基础方法部分
                 element.tabAdd('demo', {
                     title: name,
-                    content: '<iframe data-frameid="'+id+'" scrolling="auto" frameborder="0" src="'+url+'.html" style="width:100%;height:99%;"></iframe>',
+                    content: '<iframe data-frameid="'+id+'" scrolling="auto" frameborder="0" src="'+url+'" style="width:100%;height:99%;"></iframe>',
                     id: id //规定好的id
                 })
                 CustomRightClick(id); //给tab绑定右击事件
@@ -162,6 +173,7 @@
 
             $('.rightmenu').hide(); //最后再隐藏右键菜单
         })
+
         function FrameWH() {
             var h = $(window).height() -41- 10 - 60 -10-44 -10;
             $("iframe").css("height",h+"px");

@@ -1,0 +1,262 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta name="renderer" content="webkit">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
+    <title>网站后台管理模版</title>
+    <link rel="stylesheet" type="text/css" href="/layui/css/layui.css"/>
+    <link rel="stylesheet" type="text/css" href="/css/admin.css"/>
+</head>
+
+
+<body>
+
+<div class="main-layout" id='main-layout'>
+
+    <!--侧边栏-->
+    <div class="main-layout-side">
+
+        <div class="m-logo">
+        </div>
+
+        <ul class="layui-nav layui-nav-tree" lay-filter="leftNav">
+
+            <li class="layui-nav-item layui-nav-itemed">
+                <a href="javascript:;"><i class="iconfont">&#xe607;</i>权限管理</a>
+                <dl class="layui-nav-child">
+                    <dd><a href="javascript:;" data-url="/menu1" data-id="1" data-title="用户"   class="site-demo-active" data-type="tabAdd"><span class="l-line"></span>用户</a></dd>
+                    <dd><a href="javascript:;" data-url="/menu1" data-id="2" data-title="用户权限"   class="site-demo-active" data-type="tabAdd"><span class="l-line"></span>用户权限</a></dd>
+                    <dd><a href="javascript:;" data-url="/menu1" data-id="3" data-title="角色"   class="site-demo-active" data-type="tabAdd"><span class="l-line"></span>用户权限</a></dd>
+                    <dd><a href="javascript:;" data-url="/menu1" data-id="4" data-title="角色权限"   class="site-demo-active" data-type="tabAdd"><span class="l-line"></span>用户权限</a></dd>
+                </dl>
+            </li>
+
+
+            <li class="layui-nav-item">
+                <a href="javascript:;"><i class="iconfont">&#xe608;</i>VIP</a>
+                <dl class="layui-nav-child">
+                    <dd><a href="javascript:;" data-url="/menu1" data-id="5" data-title="至尊VIP"   class="site-demo-active" data-type="tabAdd"><span class="l-line"></span>至尊VIP</a></dd>
+                    <dd><a href="javascript:;" data-url="/menu1" data-id="6" data-title="终身VIP"   class="site-demo-active" data-type="tabAdd"><span class="l-line"></span>终身VIP</a></dd>
+                    <dd><a href="javascript:;" data-url="/menu1" data-id="7" data-title="时限会员"   class="site-demo-active" data-type="tabAdd"><span class="l-line"></span>时限会员</a></dd>
+                    <dd><a href="javascript:;" data-url="/menu1" data-id="8" data-title="所有用户"   class="site-demo-active" data-type="tabAdd"><span class="l-line"></span>所有用户</a></dd>
+                </dl>
+            </li>
+
+            <li class="layui-nav-item">
+                <a href="javascript:;"><i class="iconfont">&#xe608;</i>会员管理</a>
+                <dl class="layui-nav-child">
+                    <dd><a href="javascript:;" data-url="/menu1" data-id="5" data-title="用户登记"   class="site-demo-active" data-type="tabAdd"><span class="l-line"></span>用户登记</a></dd>
+                    <dd><a href="javascript:;" data-url="/menu1" data-id="6" data-title="会员升级"   class="site-demo-active" data-type="tabAdd"><span class="l-line"></span>会员升级</a></dd>
+                    <dd><a href="javascript:;" data-url="/menu1" data-id="7" data-title="喜结良缘"   class="site-demo-active" data-type="tabAdd"><span class="l-line"></span>喜结良缘</a></dd>
+                </dl>
+            </li>
+
+
+            <li class="layui-nav-item">
+                <a href="javascript:;"><i class="iconfont">&#xe608;</i>VIP</a>
+                <dl class="layui-nav-child">
+                    <dd><a href="javascript:;" data-url="/menu1" data-id="5" data-title="用户"   class="site-demo-active" data-type="tabAdd"><span class="l-line"></span>至尊VIP</a></dd>
+                    <dd><a href="javascript:;" data-url="/menu1" data-id="6" data-title="用户权限"   class="site-demo-active" data-type="tabAdd"><span class="l-line"></span>终身VIP</a></dd>
+                    <dd><a href="javascript:;" data-url="/menu1" data-id="7" data-title="角色"   class="site-demo-active" data-type="tabAdd"><span class="l-line"></span>时限会员</a></dd>
+                    <dd><a href="javascript:;" data-url="/menu1" data-id="8" data-title="角色权限"   class="site-demo-active" data-type="tabAdd"><span class="l-line"></span>所有用户</a></dd>
+                </dl>
+            </li>
+
+            <li class="layui-nav-item">
+                <a href="javascript:;"><i class="iconfont">&#xe608;</i>VIP</a>
+                <dl class="layui-nav-child">
+                    <dd><a href="javascript:;" data-url="/menu1" data-id="5" data-title="用户"   class="site-demo-active" data-type="tabAdd"><span class="l-line"></span>至尊VIP</a></dd>
+                    <dd><a href="javascript:;" data-url="/menu1" data-id="6" data-title="用户权限"   class="site-demo-active" data-type="tabAdd"><span class="l-line"></span>终身VIP</a></dd>
+                    <dd><a href="javascript:;" data-url="/menu1" data-id="7" data-title="角色"   class="site-demo-active" data-type="tabAdd"><span class="l-line"></span>时限会员</a></dd>
+                    <dd><a href="javascript:;" data-url="/menu1" data-id="8" data-title="角色权限"   class="site-demo-active" data-type="tabAdd"><span class="l-line"></span>所有用户</a></dd>
+                </dl>
+            </li>
+
+            <li class="layui-nav-item">
+                <a href="javascript:;"><i class="iconfont">&#xe608;</i>VIP</a>
+                <dl class="layui-nav-child">
+                    <dd><a href="javascript:;" data-url="/menu1" data-id="5" data-title="用户"   class="site-demo-active" data-type="tabAdd"><span class="l-line"></span>至尊VIP</a></dd>
+                    <dd><a href="javascript:;" data-url="/menu1" data-id="6" data-title="用户权限"   class="site-demo-active" data-type="tabAdd"><span class="l-line"></span>终身VIP</a></dd>
+                    <dd><a href="javascript:;" data-url="/menu1" data-id="7" data-title="角色"   class="site-demo-active" data-type="tabAdd"><span class="l-line"></span>时限会员</a></dd>
+                    <dd><a href="javascript:;" data-url="/menu1" data-id="8" data-title="角色权限"   class="site-demo-active" data-type="tabAdd"><span class="l-line"></span>所有用户</a></dd>
+                </dl>
+            </li>
+
+
+            <li class="layui-nav-item">
+                <a href="javascript:;"><i class="iconfont">&#xe608;</i>VIP</a>
+                <dl class="layui-nav-child">
+                    <dd><a href="javascript:;" data-url="/menu1" data-id="5" data-title="用户"   class="site-demo-active" data-type="tabAdd"><span class="l-line"></span>至尊VIP</a></dd>
+                    <dd><a href="javascript:;" data-url="/menu1" data-id="6" data-title="用户权限"   class="site-demo-active" data-type="tabAdd"><span class="l-line"></span>终身VIP</a></dd>
+                    <dd><a href="javascript:;" data-url="/menu1" data-id="7" data-title="角色"   class="site-demo-active" data-type="tabAdd"><span class="l-line"></span>时限会员</a></dd>
+                    <dd><a href="javascript:;" data-url="/menu1" data-id="8" data-title="角色权限"   class="site-demo-active" data-type="tabAdd"><span class="l-line"></span>所有用户</a></dd>
+                </dl>
+            </li>
+
+
+
+        </ul>
+    </div>
+
+    <!--右侧内容-->
+    <div class="main-layout-container">
+        <!--头部-->
+        <div class="main-layout-header">
+
+            <div class="menu-btn" id="hideBtn">
+                <a href="javascript:;">
+                    <span class="iconfont">&#xe60e;</span>
+                </a>
+            </div>
+
+            <ul class="layui-nav" lay-filter="rightNav">
+                <li class="layui-nav-item"><a href="javascript:;" data-url="email.html" data-id='4' data-text="邮件系统"><i class="iconfont">&#xe603;</i></a></li>
+                <li class="layui-nav-item">
+                    <a href="javascript:;" data-url="admin-info.html" data-id='7' data-text="个人信息">超级管理员</a>
+                </li>
+                <li class="layui-nav-item"><a href="javascript:;">退出</a></li>
+            </ul>
+
+        </div>
+
+        <!--主体内容-->
+        <div class="main-layout-body">
+            <!--tab 切换-->
+            <div class="layui-tab layui-tab-brief main-layout-tab" lay-filter="tab" lay-allowClose="true">
+                <ul class="layui-tab-title">
+                    <li class="layui-this welcome">后台主页</li>
+                </ul>
+                <div class="layui-tab-content">
+                    <div class="layui-tab-item layui-show" style="background: #f5f5f5;">
+                        <!--1-->
+                        <iframe src="/welcome" width="100%" height="100%" name="iframe" scrolling="auto" class="iframe" framborder="0"></iframe>
+                        <!--1end-->
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!--遮罩-->
+    <div class="main-mask">
+
+    </div>
+</div>
+<script src="/layui/layui.js" type="text/javascript" charset="utf-8"></script>
+<script src="/js/common.js" type="text/javascript" charset="utf-8"></script>
+<script src="/js/main.js" type="text/javascript" charset="utf-8"></script>
+
+<script type="text/javascript">
+    layui.use('element', function() {
+        var $ = layui.jquery;
+        var element = layui.element; //Tab的切换功能，切换事件监听等，需要依赖element模块
+        //触发事件
+        var active = {
+            //在这里给active绑定几项事件，后面可通过active调用这些事件
+            tabAdd: function(url,id,name) {
+                //新增一个Tab项 传入三个参数，分别对应其标题，tab页面的地址，还有一个规定的id，是标签中data-id的属性值
+                //关于tabAdd的方法所传入的参数可看layui的开发文档中基础方法部分
+                element.tabAdd('tab', {
+                    title: name,
+                    content: '<iframe data-frameid="'+id+'" scrolling="auto" frameborder="0" src="'+url+'" style="width:100%;height:99%;"></iframe>',
+                    id: id //规定好的id
+                })
+                CustomRightClick(id); //给tab绑定右击事件
+                FrameWH();  //计算ifram层的大小
+            },
+            tabChange: function(id) {
+                //切换到指定Tab项
+                element.tabChange('tab', id); //根据传入的id传入到指定的tab项
+            },
+            tabDelete: function (id) {
+                element.tabDelete("tab", id);//删除
+            }
+            , tabDeleteAll: function (ids) {//删除所有
+                $.each(ids, function (i,item) {
+                    element.tabDelete("tab", item); //ids是一个数组，里面存放了多个id，调用tabDelete方法分别删除
+                })
+            }
+        };
+
+
+        //当点击有site-demo-active属性的标签时，即左侧菜单栏中内容 ，触发点击事件
+        $('.site-demo-active').on('click', function() {
+            var dataid = $(this);
+
+            //这时会判断右侧.layui-tab-title属性下的有lay-id属性的li的数目，即已经打开的tab项数目
+            if ($(".layui-tab-title li[lay-id]").length <= 0) {
+                //如果比零小，则直接打开新的tab项
+                active.tabAdd(dataid.attr("data-url"), dataid.attr("data-id"),dataid.attr("data-title"));
+            } else {
+                //否则判断该tab项是否以及存在
+
+                var isData = false; //初始化一个标志，为false说明未打开该tab项 为true则说明已有
+                $.each($(".layui-tab-title li[lay-id]"), function () {
+                    //如果点击左侧菜单栏所传入的id 在右侧tab项中的lay-id属性可以找到，则说明该tab项已经打开
+                    if ($(this).attr("lay-id") == dataid.attr("data-id")) {
+                        isData = true;
+                    }
+                })
+                if (isData == false) {
+                    //标志为false 新增一个tab项
+                    active.tabAdd(dataid.attr("data-url"), dataid.attr("data-id"),dataid.attr("data-title"));
+                }
+            }
+            //最后不管是否新增tab，最后都转到要打开的选项页面上
+            active.tabChange(dataid.attr("data-id"));
+        });
+
+        function CustomRightClick(id) {
+            //取消右键  rightmenu属性开始是隐藏的 ，当右击的时候显示，左击的时候隐藏
+            $('.layui-tab-title li').on('contextmenu', function () { return false; })
+            $('.layui-tab-title,.layui-tab-title li').click(function () {
+                $('.rightmenu').hide();
+            });
+            //桌面点击右击
+            $('.layui-tab-title li').on('contextmenu', function (e) {
+                var popupmenu = $(".rightmenu");
+                popupmenu.find("li").attr("data-id",id); //在右键菜单中的标签绑定id属性
+
+                //判断右侧菜单的位置
+                l = ($(document).width() - e.clientX) < popupmenu.width() ? (e.clientX - popupmenu.width()) : e.clientX;
+                t = ($(document).height() - e.clientY) < popupmenu.height() ? (e.clientY - popupmenu.height()) : e.clientY;
+                popupmenu.css({ left: l, top: t }).show(); //进行绝对定位
+                //alert("右键菜单")
+                return false;
+            });
+        }
+
+        $(".rightmenu li").click(function () {
+
+            //右键菜单中的选项被点击之后，判断type的类型，决定关闭所有还是关闭当前。
+            if ($(this).attr("data-type") == "closethis") {
+                //如果关闭当前，即根据显示右键菜单时所绑定的id，执行tabDelete
+                active.tabDelete($(this).attr("data-id"))
+            } else if ($(this).attr("data-type") == "closeall") {
+                var tabtitle = $(".layui-tab-title li");
+                var ids = new Array();
+                $.each(tabtitle, function (i) {
+                    ids[i] = $(this).attr("lay-id");
+                })
+                //如果关闭所有 ，即将所有的lay-id放进数组，执行tabDeleteAll
+                active.tabDeleteAll(ids);
+            }
+
+            $('.rightmenu').hide(); //最后再隐藏右键菜单
+        })
+        function FrameWH() {
+            var h = $(window).height() -41- 10 - 60 -10-44 -10;
+            $("iframe").css("height",h+"px");
+        }
+
+        $(window).resize(function () {
+            FrameWH();
+        })
+    });
+</script>
+
+
+
+</body>
+</html>
