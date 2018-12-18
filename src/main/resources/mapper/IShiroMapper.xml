@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.jakcray.springbootshiro.shiro.ShiroMapper.IShiroMapper" >
+    <resultMap id="BaseResultMap" type="com.jakcray.springbootshiro.shiro.ShiroDao.ShiroDao" >
+
+        <collection property="roles" ofType="java.lang.String">
+            <result property="context" column="context"/>
+        </collection>
+
+        <collection property="permissions" ofType="java.lang.String">
+            <result property="context" column="context"/>
+        </collection>
+    </resultMap>
+
+    <select id="getShiroDaoByUserName" resultMap="BaseResultMap" parameterType="java.lang.String" >
+        select r.context,p.context from user u inner join user_role ur on u.iduser = ur.iduser
+        inner join role r on r.idrole = ur.idrole
+        inner join role_permission rp on rp.idrole = r.idrole
+        inner join permission p on p.idpermission = rp.idpermission
+        where u.username = #{username,jdbcType=VARCHAR}
+    </select>
+
+</mapper>

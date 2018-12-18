@@ -1,7 +1,8 @@
 package com.jakcray.springbootshiro.shiro;
 
+import at.pollux.thymeleaf.shiro.dialect.ShiroDialect;
 import org.apache.shiro.authc.credential.HashedCredentialsMatcher;
-import org.apache.shiro.cache.ehcache.EhCacheManager;
+//import org.apache.shiro.cache.ehcache.EhCacheManager;
 import org.apache.shiro.mgt.SecurityManager;
 import org.apache.shiro.spring.LifecycleBeanPostProcessor;
 import org.apache.shiro.spring.security.interceptor.AuthorizationAttributeSourceAdvisor;
@@ -11,6 +12,7 @@ import org.apache.shiro.web.mgt.DefaultWebSecurityManager;
 import org.apache.shiro.web.servlet.Cookie;
 import org.apache.shiro.web.servlet.SimpleCookie;
 import org.springframework.aop.framework.autoproxy.DefaultAdvisorAutoProxyCreator;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.DependsOn;
@@ -23,33 +25,30 @@ import java.util.Map;
 public class ShiroConfig {
 
     @Bean
-    public ShiroFilterFactoryBean shiroFilter(SecurityManager securityManager){
+    public ShiroFilterFactoryBean shiroFilter(@Qualifier("securityManager") DefaultWebSecurityManager securityManager){
         ShiroFilterFactoryBean shiroFilterFactoryBean = new ShiroFilterFactoryBean();
         //设置安全管理器
         shiroFilterFactoryBean.setSecurityManager(securityManager);
         //默认跳转到登录页面
         shiroFilterFactoryBean.setLoginUrl("/login");
-        //登录成功后的页面
-        shiroFilterFactoryBean.setSuccessUrl("/index");
-        shiroFilterFactoryBean.setUnauthorizedUrl("/403");
-
+       //登录成功后的页面(如果是管理员则进入管理界面，如果是用户则进入用户主页)
+        shiroFilterFactoryBean.setSuccessUrl("/main");
+        shiroFilterFactoryBean.setUnauthorizedUrl("/noAuth");
 
         //自定义过滤器
-        Map<String, Filter> filterMap = new LinkedHashMap<>();
-        shiroFilterFactoryBean.setFilters(filterMap);
+//        Map<String, Filter> filterMap = new LinkedHashMap<>();
+//        shiroFilterFactoryBean.setFilters(filterMap);
 
         //设置控制map
         Map<String,String> filterChainDefinitionMap = new LinkedHashMap<>();
         //配置不会被拦截的链接  顺序判断
-        filterChainDefinitionMap.put("/static/**","anon");
+        filterChainDefinitionMap.put("/static/**","authc");
         //配置退出，过滤器，其中的具体的退出代码Shiro已经以我们实现了
         filterChainDefinitionMap.put("/logout","logout");
 
-
-
         //特别注意，过滤链定义，从上向下顺序执行，一般讲/**放在最边，这是一个坑呢，一不小心代码就不好使了
         //所有的url都必须认证通过后才可以访问，anon所有url都可以匿名访问
-//        filterChainDefinitionMap.put("/**","annon")
+//        filterChainDefinitionMap.put("/**","authc");
 
         shiroFilterFactoryBean.setFilterChainDefinitionMap(filterChainDefinitionMap);
         return shiroFilterFactoryBean;
@@ -62,8 +61,8 @@ public class ShiroConfig {
      * （好像所有的shiro功能都需要设置在这个里面）
      * @return
      */
-    @Bean
-    public SecurityManager securityManager(){
+    @Bean(value = "securityManager")
+    public DefaultWebSecurityManager securityManager(){
         DefaultWebSecurityManager defaultWebSecurityManager = new DefaultWebSecurityManager();
         //设置realm
         defaultWebSecurityManager.setRealm(myShiroRealm());
@@ -86,6 +85,17 @@ public class ShiroConfig {
 
         return myShiroRealm;
     }
+
+    /**
+     * 整合thymeleaf
+     * 实现页面的权限显示与否
+     */
+    @Bean
+    public ShiroDialect getShiroDialect(){
+        return new ShiroDialect();
+    }
+
+
 
 //    /**
 //     * 配置自定义的密码比较器

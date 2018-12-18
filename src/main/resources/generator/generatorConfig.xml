@@ -40,5 +40,65 @@
                enableUpdateByExample="true" enableDeleteByExample="true"
                enableSelectByExample="true" selectByExampleQueryId="true">
         </table>
+        <!--
+        <table schema="xq" tableName="user_role" domainObjectName="UserRoleDAO" enableCountByExample="true"
+               enableUpdateByExample="true" enableDeleteByExample="true"
+               enableSelectByExample="true" selectByExampleQueryId="true">
+        </table>
+
+        <table schema="xq" tableName="userextrainfo" domainObjectName="UserExtraInfoDAO" enableCountByExample="true"
+               enableUpdateByExample="true" enableDeleteByExample="true"
+               enableSelectByExample="true" selectByExampleQueryId="true">
+        </table>
+
+        <table schema="xq" tableName="userinfo" domainObjectName="UserInfoDAO" enableCountByExample="true"
+               enableUpdateByExample="true" enableDeleteByExample="true"
+               enableSelectByExample="true" selectByExampleQueryId="true">
+        </table>
+
+        <table schema="xq" tableName="manage" domainObjectName="ManageDAO" enableCountByExample="true"
+               enableUpdateByExample="true" enableDeleteByExample="true"
+               enableSelectByExample="true" selectByExampleQueryId="true">
+        </table>
+
+        <table schema="xq" tableName="manage_role" domainObjectName="ManageRoleDAO" enableCountByExample="true"
+               enableUpdateByExample="true" enableDeleteByExample="true"
+               enableSelectByExample="true" selectByExampleQueryId="true">
+        </table>
+
+        <table schema="xq" tableName="manageinfo" domainObjectName="ManageInfoDAO" enableCountByExample="true"
+               enableUpdateByExample="true" enableDeleteByExample="true"
+               enableSelectByExample="true" selectByExampleQueryId="true">
+        </table>
+
+        <table schema="xq" tableName="managetype" domainObjectName="ManageTypeDAO" enableCountByExample="true"
+               enableUpdateByExample="true" enableDeleteByExample="true"
+               enableSelectByExample="true" selectByExampleQueryId="true">
+        </table>
+
+        <table schema="xq" tableName="module" domainObjectName="ModuleDAO" enableCountByExample="true"
+               enableUpdateByExample="true" enableDeleteByExample="true"
+               enableSelectByExample="true" selectByExampleQueryId="true">
+        </table>
+
+        <table schema="xq" tableName="permission" domainObjectName="PermissionDAO" enableCountByExample="true"
+               enableUpdateByExample="true" enableDeleteByExample="true"
+               enableSelectByExample="true" selectByExampleQueryId="true">
+        </table>-->
+
+        <table schema="xq" tableName="role" domainObjectName="RoleDAO" enableCountByExample="true"
+               enableUpdateByExample="true" enableDeleteByExample="true"
+               enableSelectByExample="true" selectByExampleQueryId="true">
+        </table>
+
+        <!--
+        <table schema="xq" tableName="role_permission" domainObjectName="RolePermissionDAO" enableCountByExample="true"
+               enableUpdateByExample="true" enableDeleteByExample="true"
+               enableSelectByExample="true" selectByExampleQueryId="true">
+        </table>-->
+
+
+
+
     </context>
 </generatorConfiguration>

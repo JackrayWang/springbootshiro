@@ -1,7 +1,5 @@
 package com.jakcray.springbootshiro.mybatisutils.dao;
 
-import org.springframework.stereotype.Repository;
-
 import java.util.Date;
 
 public class UserDAO {
