@@ -16,7 +16,6 @@ public class TestController {
     @Autowired
     UserDAOMapper userDAOMapper;
 
-
     private static final Logger logger = LoggerFactory.getLogger(TestController.class.getName());
 
     @RequestMapping(value = "/test",method = RequestMethod.GET)

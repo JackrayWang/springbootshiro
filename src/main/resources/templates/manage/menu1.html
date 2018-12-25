@@ -1,12 +1,160 @@
 <!DOCTYPE html>
-<html lang="en">
+<html>
+
 <head>
     <meta charset="UTF-8">
-    <title>Title</title>
+    <meta name="renderer" content="webkit">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
+    <title>网站后台管理模版</title>
+    <link rel="stylesheet" type="text/css" href="/layui/css/layui.css" />
+    <link rel="stylesheet" type="text/css" href="/css/admin.css" media="all"/>
 </head>
+
 <body>
 
+<table id="demo" lay-filter="test"></table>
 
-test
+
+<script src="/layui/layui.js" type="text/javascript" charset="utf-8"></script>
+<script src="/js/common.js" type="text/javascript" charset="utf-8"></script>
+
+
+<script type="text/html" id="barDemo">
+    <a class="layui-btn layui-btn-xs" lay-event="adduser">增加</a>
+    <a class="layui-btn layui-btn-xs" lay-event="view">查看</a>
+    <a class="layui-btn layui-btn-xs" lay-event="delete">删除</a>
+    <a class="layui-btn layui-btn-xs" lay-event="edit">修改</a>
+    <a class="layui-btn layui-btn-xs" lay-event="set">设置</a>
+    <a class="layui-btn layui-btn-xs" lay-event="query">查询</a>
+</script>
+<script type="text/html" id="loginTime">
+    {{ dateFormat(d.loginTime) }}   // d是layui自带的
+</script>
+
+<script>
+    //
+    layui.use('table', function(){
+        var table = layui.table;
+        //渲染器
+        table.render({
+            elem: '#demo',
+            height: 800,
+            method: 'post',
+            url: '/getManagers',
+            toolbar: '#barDemo',
+            loading:true,
+            page: true,
+            cols: [[
+                {type:'radio', title: '单选',fixed: 'left'},
+                {field: 'iduser', title: 'ID', width:300, sort: true},
+                {field: 'username', title: '用户名', width:80},
+                {field: 'email', title: '邮箱', width:80},
+                {field: 'wechat', title: '微信', width:80},
+                {field: 'phoneno', title: '电话号码', width:160},
+                {field: 'status', title: '状态', width:80},
+                {field: 'addtime', title: '加入时间', width:160},
+                {field: 'ts', title: '更新时间', width:160},
+                // {fixed: 'right',title: '操作', width:250, align:'center', toolbar: '#barDemo'}
+            ]
+            ]
+        });
+
+        //监听工具条
+        table.on('toolbar(test)', function(obj){
+            var layEvent = obj.event;
+            var tr = obj.tr;
+            var radio = obj.radio;
+            var checkStatus = table.checkStatus(obj.config.id); //获取选中行状态
+            var data = checkStatus.data;
+            var $ = layui.jquery, layer = layui.layer;
+            if(layEvent === 'adduser'){
+                layer.open({
+                    type: 1
+                    ,title: '新增'
+                    // ,closeBtn: false
+                    ,area: ['600px', '500px']
+                    ,shade: 0.8
+                    ,id: 'LAY_layuipro' //设定一个id，防止重复弹出
+                    ,btn: ['确定', '取消']
+                    ,btnAlign: 'c'
+                    ,moveType: 1 //拖拽模式，0或者1
+                    ,content: '<form id="addManagers" class="layui-form" action="/managerAdd" method="post"><div class="layui-form-item"><br>' +
+                        '<label class="layui-form-label">用户名：</label><div class="layui-input-block"><input type="text" style="width:400px" name="managename1" required  lay-verify="required" placeholder="请输入登录时的用户名" autocomplete="off" class="layui-input"></div><br>' +
+                        '<label class="layui-form-label">邮箱：</label><div class="layui-input-block"><input type="text" style="width:400px" name="manageemail1" required  lay-verify="required" placeholder="请输入您的邮箱" autocomplete="off" class="layui-input"></div><br>' +
+                        '<label class="layui-form-label">微信：</label><div class="layui-input-block"><input type="text" name="managewechat1" style="width:400px" required  lay-verify="required" placeholder="请输入您的微信" autocomplete="off" class="layui-input"></div><br>' +
+                        '<label class="layui-form-label">电话号码：</label><div class="layui-input-block"><input type="text" style="width:400px" name="managephone1" required  lay-verify="required" placeholder="请输入您的电话号码" autocomplete="off" class="layui-input"></div><br>' +
+                        '<label class="layui-form-label">状态：</label><div class="layui-input-block"><input type="text" name="managestatus1" style="width:400px" required  lay-verify="required" placeholder="用户状态" autocomplete="off" class="layui-input"></div><br>' +
+                        '<label class="layui-form-label">密码：</label><div class="layui-input-block"><input type="text" name="managepwd1" style="width:400px" required  lay-verify="required" placeholder="用户状态" autocomplete="off" class="layui-input"></div><br>' +
+                        '<label class="layui-form-label">密码确认:</label><div class="layui-input-block"><input type="text" style="width:400px" name="managepwd2" required  lay-verify="required" placeholder="请输入标题" autocomplete="off" class="layui-input"></div></div>' +
+                        '</form>'
+
+                    ,yes: function(){
+                        //新增用户
+                        var username = $("input[name='managename1']").val();
+                        var email = $("input[name='manageemail1']").val();
+                        var wechat = $("input[name='managewechat1']").val();
+                        var phoneno = $("input[name='managephone1']").val();
+                        var status = $("input[name='managestatus1']").val();
+                        var password = $("input[name='managepwd1']").val();
+
+                        //获取form中的数据，组装数据发送请求
+                        var dd={
+                            "username":username,
+                            "email":email,
+                            "wechat":wechat,
+                            "phoneno":phoneno,
+                            "status":status,
+                            "password":password
+                        };
+                        $.ajax({
+                            type : "post",
+                            url : "/managersAdd",
+                            dataType : "json",
+                            contentType : "application/json",
+                            data : JSON.stringify(dd),
+                            success : function(data) {
+                                table.reload('demo',{
+                                    url: '/getManagers',
+                                    method: 'post'
+                                });
+                                alert("管理员新增成功");
+                                layer.closeAll();
+                            }
+                        });
+                    }
+                    ,btn2: function(){
+                                layer.closeAll();
+                    }
+
+                });
+
+            }else if(layEvent === 'view'){
+                if(data.length === 0){
+                    layer.msg('请选择一行');
+                }
+            }else if(layEvent === 'delete'){
+                if(data.length === 0){
+                    layer.msg('请选择一行');
+                }
+            }else if(layEvent === 'edit'){
+                //do something
+                if(data.length === 0){
+                    layer.msg('请选择一行');
+                }
+            }else if(layEvent === 'set'){
+                if(data.length === 0){
+                    layer.msg('请选择一行');
+                }
+            }else if(layEvent === 'query'){
+                if(data.length === 0){
+                    layer.msg('请选择一行');
+                }
+            }
+        });
+
+    });
+</script>
 </body>
+
 </html>

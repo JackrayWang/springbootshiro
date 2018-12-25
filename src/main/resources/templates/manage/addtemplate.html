@@ -1,0 +1,276 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <link rel="stylesheet" type="text/css" href="/layui/css/layui.css" />
+    <!--<link rel="stylesheet" type="text/css" href="/css/admin.css" media="all"/>-->
+</head>
+<body>
+
+
+<div class="demoTable" style="margin-top: 50px">
+    <div class="layui-inline">
+        <form class="layui-form">
+            <div class="layui-form-item"
+                 style="margin-bottom: 0px; margin-top: 3px">
+                <select name="demoReload" lay-filter="demoReload" id="demoReload">
+                    <option value="">请选择类型</option>
+                </select>
+            </div>
+
+            <div class="layui-form-item  layui-form-pane " pane
+                 style="width: 735px;margin-top:3px">
+            <label class="layui-form-label"> 请选择范围</label>
+            <div class="layui-input-block" style="width: 700px;">
+                <input type="text" id="startTime" class="layui-input"
+                       placeholder="开始时间" style="width: 300px; display:inline;" /> <input
+                    type="text" id="endTime" class="layui-input" placeholder="结束时间"
+                    style="margin-left:20px; width: 300px; display:inline;" />
+            </div>
+    </div>
+
+
+    </form>
+</div>
+
+
+<button class="layui-btn" data-type="reload">搜索</button>
+
+
+<button class="layui-btn" data-type="click">添加</button>
+
+
+</div>
+
+<table class="layui-hide" id="LAY_table_user" lay-filter="user"></table>
+
+<div class="layui-row" id="test" style="display: none;">
+    <div class="layui-col-md10" style="margin-top:30px">
+        <form class="layui-form" id="endit" lay-filter="example">
+            <div class="layui-form-item" id="recordno">
+                <label class="layui-form-label">记录编号：</label>
+                <div class="layui-input-block">
+                    <input type="text" name="recordno" id="recordno12"
+                           class="layui-input">
+                </div>
+            </div>
+            <div class="layui-form-item">
+                <label class="layui-form-label">变动金额：</label>
+                <div class="layui-input-block">
+                    <input type="text" name="recordmoney" class="layui-input">
+                </div>
+            </div>
+            <div class="layui-form-item">
+                <label class="layui-form-label">类型：</label>
+                <div class="layui-input-block">
+                    <select name="ecordremar" lay-filter="ecordremar" id="ecordremar">
+                        <option value="">请选择</option>
+                    </select>
+                </div>
+            </div>
+
+            <div class="layui-inline" style="width:335px">
+                <label class="layui-form-label">日期选择</label>
+                <div class="layui-input-block">
+                    <input name="recordtime" id="date1" autocomplete="off"
+                           class="layui-input" type="text">
+                </div>
+            </div>
+        </form>
+    </div>
+</div>
+
+
+
+
+<script type="text/html" id="barDemo">
+    <a class="layui-btn layui-btn-primary layui-btn-xs" lay-event="detail">添加</a>
+    <a class="layui-btn layui-btn-xs" lay-event="edit">编辑</a>
+    <a class="layui-btn layui-btn-danger layui-btn-xs" lay-event="del">删除</a>
+</script>
+<!-- 注意：如果你直接复制所有代码到本地，上述js路径需要改成你本地的 -->
+<script type="text/javascript"
+        src="layui/layui.js" charset="utf-8">
+</script>
+
+<script>
+
+    var form='';//定义全局变量
+    layui.use(['form','laydate'],function(){
+        form  = layui.form,
+            laydate = layui.layuidate;
+        form.render();//更新渲染表单
+    });
+
+
+    layui.use('table', function(){
+        var table = layui.table;
+        //方法级渲染
+        table.render({
+            elem: '#LAY_table_user'
+            ,url: '/AAATest/index'
+            ,cols: [[
+                {field:'recordno', title: '记录编号', width:200,fixed: true}
+                ,{field:'recordtime', title: '记录时间', width:260}
+                ,{field:'recordmoney', title: '变动金额', width:300}
+                ,{field:'ecordremar', title: '类型', width:300}
+                ,{fixed: 'right', width:300, align:'center', toolbar: '#barDemo'}
+
+            ]
+            ],
+            /*数据回调*/
+            done : function(res, curr, count){
+                $.each(res.type,function(index,item){
+                    $('#demoReload').append(new Option(item.tradeName,item.tradeld));// 下拉菜单里添加元素
+                    $('#ecordremar').append(new Option(item.tradeName,item.tradeld));// 下拉菜单里添加元素
+                });
+
+                form.render();//下拉菜单渲染 把内容加载进去
+
+
+            }
+            ,id: 'testReload'
+            ,page: true
+            ,height:300
+            ,limit:5
+        });
+
+        var $ = layui.$, active = {
+            reload: function(){
+                var demoReload = $('#demoReload');
+                //执行重载
+                table.reload('testReload', {
+                    page: {
+                        curr: 1 //重新从第 1 页开始
+                    }
+                    ,where: {
+                        key: {
+                            /**
+                             *参数传递
+                             */
+                            id: demoReload.val(),//类型参数
+                            statime:$('#startTime').val(),//开始时间
+                            endTime:$('#endTime').val()//结束时间
+                        }
+                    }
+                });
+            }
+
+        };
+
+        table.on('tool(user)', function(obj){
+            var data = obj.data;
+            if(obj.event === 'detail'){
+
+                //表单初始赋值
+                $("input").val("");
+                $("#recordno").attr("style","display:none;");//隐藏div
+                form.render();
+                layer.open({
+                    title:"添加"
+                    ,type:1
+                    ,moveOut:true
+                    ,content:$("#test")
+                    ,offset:['2%','40%']
+                    ,area:['400px','450px']
+                    ,btn:['提交','取消'],
+                    yes:function(index,layero){
+                        //发送请求
+                    }
+
+                })
+
+
+
+                /* layer.msg('ID：'+ data.id + ' 的查看操作'); */
+            } else if(obj.event === 'del'){
+                layer.confirm('真的删除行么', function(index){
+                    //这里发送请求
+                });
+            } else if(obj.event === 'edit'){
+                layer.open({
+                    title:"修改"
+                    ,type:1
+                    ,moveOut:true
+                    ,content:$("#test")
+                    ,offset:['2%','40%']
+                    ,area:['400px','450px']
+                    ,btn:['提交','取消'],
+                    yes:function(index,layero){
+                        //发送请求
+                    }
+
+                })
+
+                //表单初始赋值
+                form.val('example',data);
+                $("#recordno").attr("style","display:block;");//隐藏div
+                $("#recordno").attr('readonly','readonly');
+                //渲染表单
+                //时间范围
+                layui.use('laydate',function(){
+                    var laydate = layui.laydate;
+                    laydate.render({
+                        elem:'#date1',
+                        type:'datetime'
+                    });
+                });
+                form.render();
+            }
+        });
+
+
+
+        $('.demoTable .layui-btn').on('click', function(){
+
+            var type = $(this).data('type');
+            if(type=='click'){
+                //表单初始赋值
+                $("input").val("");
+                form.render();
+                layer.open({
+                    title:"添加"
+                    ,type:1
+                    ,moveOut:true
+                    ,content:$("#test")
+                    ,offset:['2%','40%']
+                    ,area:['400px','450px']
+                    ,btn:['提交','取消'],
+                    yes:function(index,layero){
+                        //发送请求
+                    }
+
+                })
+
+            }
+            active[type] ? active[type].call(this) : '';
+            $('#demoReload').empty();
+            $('#demoReload').append(new Option("请选择",''));
+            form.render("select");//下拉菜单渲染 把内容加载进去
+        });
+    });
+
+    layui.use('laydate', function(){
+        var laydate = layui.laydate;
+
+        //常规用法
+        laydate.render({
+            elem: '#startTime',
+            type:'datetime'
+        });
+
+        //常规用法
+        laydate.render({
+            elem: '#endTime',
+            type:'datetime'
+        });
+
+    });
+
+
+</script>
+
+
+</body>
+</html>
