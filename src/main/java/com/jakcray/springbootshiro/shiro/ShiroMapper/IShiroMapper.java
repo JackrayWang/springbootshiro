@@ -7,7 +7,5 @@ import org.springframework.stereotype.Repository;
 @Repository
 @Mapper
 public interface IShiroMapper {
-
     public ShiroDao getShiroDaoByUserName(String username);
-
 }

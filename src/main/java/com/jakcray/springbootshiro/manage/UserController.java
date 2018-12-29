@@ -51,21 +51,14 @@ public class UserController {
 
     //删除管理员
     @RequestMapping(value = "/managersDelete" ,method = RequestMethod.POST)
-    public String managersDelete(){
-
-        UserDAOExample ude = new UserDAOExample();
-        ude.createCriteria().andIduserIsNotNull();
-        List<UserDAO> userDAOS = userDAOMapper.selectByExample(ude);
-        //现在是查询所有的用户，之后如果有权限设置之后应该查询  对应的部门的用户的管理员
-        String s = JSON.toJSONString(userDAOS);
-        logger.info(s);
-
+    @ResponseBody
+    public String managersDelete(@RequestBody UserDAO user){
+        String iduser = user.getIduser();
+        userDAOMapper.deleteByPrimaryKey(iduser);
         JSONObject obj=new JSONObject();
         //前台通过key值获得对应的value值
-        obj.put("code", 0);
-        obj.put("msg", "");
-        obj.put("count",1000);
-        obj.put("data",userDAOS);
+        obj.put("status", "管理员删除成功");
+        logger.info(obj.toString());
         return obj.toJSONString();
     }
 
@@ -87,22 +80,16 @@ public class UserController {
 
     //编辑
     @RequestMapping(value = "/managersEdit" ,method = RequestMethod.POST)
-    public String managersEdit(){
-
-        UserDAOExample ude = new UserDAOExample();
-        ude.createCriteria().andIduserIsNotNull();
-        List<UserDAO> userDAOS = userDAOMapper.selectByExample(ude);
-        //现在是查询所有的用户，之后如果有权限设置之后应该查询  对应的部门的用户的管理员
-        String s = JSON.toJSONString(userDAOS);
-        logger.info(s);
+    @ResponseBody
+    public JSONObject managersEdit(@RequestBody UserDAO user){
+        logger.info("=====>更新<======"+JSON.toJSONString(user));
+        user.setTs(new Date());
+        userDAOMapper.updateByPrimaryKeySelective(user);
 
         JSONObject obj=new JSONObject();
         //前台通过key值获得对应的value值
-        obj.put("code", 0);
-        obj.put("msg", "");
-        obj.put("count",1000);
-        obj.put("data",userDAOS);
-        return obj.toJSONString();
+        obj.put("status","更新成功");
+        return obj;
     }
 
 }
