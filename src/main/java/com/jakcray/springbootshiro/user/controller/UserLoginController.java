@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 @Controller
 public class UserLoginController {
 
+
     @RequestMapping(value = "/userLogin",method = RequestMethod.POST)
     @ResponseBody
     public String userLogin(@RequestBody UserDAO userDAO){
